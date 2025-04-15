@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head :: head('ruleList')}"></head>
+  <body>
+    <div class="container">
+      <header th:replace="~{fragments/header :: header}"></header>
+      <div class="row">
+        <h2>Rule List</h2>
+      </div>
+      <div
+        th:if="${successMessage}"
+        th:text="${successMessage}"
+        class="alert alert-success"
+      ></div>
+      <div
+        th:if="${errorMessage}"
+        th:text="${errorMessage}"
+        class="alert alert-danger"
+      ></div>
+      <div class="row">
+        <a href="/ruleName/add" class="btn btn-primary btn-sm">Add New</a>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>json</th>
+              <th>template</th>
+              <th>sql</th>
+              <th>sqlPart</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="rule : ${rules}">
+              <td style="width: 10%" th:text="${rule.id}"></td>
+              <td th:text="${rule.name}"></td>
+              <td th:text="${rule.description}"></td>
+              <td th:text="${rule.json}"></td>
+              <td th:text="${rule.template}"></td>
+              <td th:text="${rule.sqlStr}"></td>
+              <td th:text="${rule.sqlPart}"></td>
+              <td style="width: 15%" class="text-center">
+                <a
+                  th:href="@{/ruleName/update/{id}(id=${rule.id})}"
+                  class="btn btn-link p-0"
+                  >Edit</a
+                >&nbsp;|&nbsp;
+                <form
+                  th:action="@{/ruleName/delete/{id}(id=${rule.id})}"
+                  method="post"
+                  style="display: inline"
+                  onsubmit="return confirm('Are you sure you want to delete this item ?');"
+                >
+                  <button type="submit" class="btn btn-link p-0">Delete</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
