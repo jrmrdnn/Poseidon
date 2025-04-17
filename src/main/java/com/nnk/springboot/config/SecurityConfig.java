@@ -13,7 +13,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig {
 
-  private static final String[] PUBLIC_PATHS = { "/**", "/login", "/css/**" };
+  private static final String[] PUBLIC_PATHS = { "/", "/login", "/css/**" };
   private static final String LOGIN_PATH = "/login";
   private static final String LOGOUT_PATH = "/app-logout";
   private static final String SUCCESS_PATH = "/bidList/list";

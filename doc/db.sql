@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS `Trade`;
 DROP TABLE IF EXISTS `CurvePoint`;
 DROP TABLE IF EXISTS `Rating`;
 DROP TABLE IF EXISTS `Rule`;
-DROP TABLE IF EXISTS `Users`;
+DROP TABLE IF EXISTS `User`;
 
 CREATE TABLE IF NOT EXISTS `BidList` (
   `BidListId` int NOT NULL AUTO_INCREMENT,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `Rating` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `RuleName` (
+CREATE TABLE IF NOT EXISTS `Rule` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(125),
   `description` VARCHAR(125),
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `RuleName` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `Users` (
+CREATE TABLE IF NOT EXISTS `User` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(125),
   `password` VARCHAR(125),
@@ -95,9 +95,9 @@ CREATE TABLE IF NOT EXISTS `Users` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `Users`(`fullname`, `username`, `password`, `role`) VALUES 
-('Administrator', 'admin', '$2a$10$6qkJ0dPqYlxgALjdmxQtpuqMBXPBOWPqE2Q1H8t3wsqQNajPwCkuu', 'ADMIN'),
-('User', 'user', '$2a$10$6qkJ0dPqYlxgALjdmxQtpuqMBXPBOWPqE2Q1H8t3wsqQNajPwCkuu', 'USER');
+INSERT INTO `User`(`fullname`, `username`, `password`, `role`) VALUES 
+('Administrator', 'admin', '$2a$10$6qkJ0dPqYlxgALjdmxQtpuqMBXPBOWPqE2Q1H8t3wsqQNajPwCkuu', 'ROLE_ADMIN'),
+('User', 'user', '$2a$10$6qkJ0dPqYlxgALjdmxQtpuqMBXPBOWPqE2Q1H8t3wsqQNajPwCkuu', 'ROLE_USER');
 
 INSERT INTO `BidList`(`account`, `type`, `bidQuantity`) VALUES 
 ('Account1', 'Type1', 1000),
