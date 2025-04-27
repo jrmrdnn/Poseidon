@@ -1,5 +1,6 @@
 package com.nnk.springboot;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
@@ -16,5 +17,10 @@ public class ApplicationTests {
   @Test
   public void contextLoads() {
     assertNotNull(applicationContext);
+  }
+
+  @Test
+  public void testMain() {
+    assertDoesNotThrow(() -> SpringbootApplication.main(new String[] {}));
   }
 }
