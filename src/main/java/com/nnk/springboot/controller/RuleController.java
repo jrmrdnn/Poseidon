@@ -13,16 +13,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/ruleName")
 @Slf4j
 @AllArgsConstructor
 public class RuleController {
 
   private final RuleService ruleService;
 
-  @GetMapping("/ruleName/list")
+  @GetMapping("/list")
   public String showRule(RedirectAttributes redirectAttributes, Model model) {
     try {
       List<Rule> rules = ruleService.getAllRules();
@@ -36,14 +38,14 @@ public class RuleController {
     return "rule/list";
   }
 
-  @GetMapping("/ruleName/add")
+  @GetMapping("/add")
   public String showAddRuleForm(Model model) {
     RuleDto ruleDto = new RuleDto();
     model.addAttribute("ruleDto", ruleDto);
     return "rule/add";
   }
 
-  @GetMapping("/ruleName/update/{id}")
+  @GetMapping("/update/{id}")
   public String showUpdateRuleForm(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,
@@ -65,7 +67,7 @@ public class RuleController {
     return "rule/update";
   }
 
-  @PostMapping("/ruleName/validate")
+  @PostMapping("/validate")
   public String validateRule(
     @Valid RuleDto ruleDto,
     BindingResult result,
@@ -92,7 +94,7 @@ public class RuleController {
     return "redirect:/ruleName/list";
   }
 
-  @PostMapping("/ruleName/update/{id}")
+  @PostMapping("/update/{id}")
   public String updateRule(
     @PathVariable("id") Integer id,
     @Valid RuleDto ruleDto,
@@ -123,7 +125,7 @@ public class RuleController {
     return "redirect:/ruleName/list";
   }
 
-  @PostMapping("/ruleName/delete/{id}")
+  @PostMapping("/delete/{id}")
   public String deleteRule(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,

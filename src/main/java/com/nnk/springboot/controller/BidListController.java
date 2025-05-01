@@ -13,16 +13,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/bidList")
 @Slf4j
 @AllArgsConstructor
 public class BidListController {
 
   private final BidListService bidListService;
 
-  @GetMapping("/bidList/list")
+  @GetMapping("/list")
   public String showBidList(
     RedirectAttributes redirectAttributes,
     Model model
@@ -39,14 +41,14 @@ public class BidListController {
     return "bidList/list";
   }
 
-  @GetMapping("/bidList/add")
+  @GetMapping("/add")
   public String showAddBidForm(Model model) {
     BidListDto bidListDto = new BidListDto();
     model.addAttribute("bidListDto", bidListDto);
     return "bidList/add";
   }
 
-  @GetMapping("/bidList/update/{id}")
+  @GetMapping("/update/{id}")
   public String showUpdateBidForm(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,
@@ -68,7 +70,7 @@ public class BidListController {
     return "bidList/update";
   }
 
-  @PostMapping("/bidList/validate")
+  @PostMapping("/validate")
   public String validateBid(
     @Valid BidListDto bidListDto,
     BindingResult result,
@@ -95,7 +97,7 @@ public class BidListController {
     return "redirect:/bidList/list";
   }
 
-  @PostMapping("/bidList/update/{id}")
+  @PostMapping("/update/{id}")
   public String updateBid(
     @PathVariable Integer id,
     @Valid BidListDto bidListDto,
@@ -125,7 +127,7 @@ public class BidListController {
     return "redirect:/bidList/list";
   }
 
-  @PostMapping("/bidList/delete/{id}")
+  @PostMapping("/delete/{id}")
   public String deleteBid(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,

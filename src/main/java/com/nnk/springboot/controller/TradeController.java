@@ -13,16 +13,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/trade")
 @Slf4j
 @AllArgsConstructor
 public class TradeController {
 
   private final TradeService tradeService;
 
-  @GetMapping("/trade/list")
+  @GetMapping("/list")
   public String showTrade(RedirectAttributes redirectAttributes, Model model) {
     try {
       List<Trade> trades = tradeService.getAllTrades();
@@ -39,14 +41,14 @@ public class TradeController {
     return "trade/list";
   }
 
-  @GetMapping("/trade/add")
+  @GetMapping("/add")
   public String showAddTradeForm(Model model) {
     TradeDto tradeDto = new TradeDto();
     model.addAttribute("tradeDto", tradeDto);
     return "trade/add";
   }
 
-  @GetMapping("/trade/update/{id}")
+  @GetMapping("/update/{id}")
   public String showUpdateTradeForm(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,
@@ -68,7 +70,7 @@ public class TradeController {
     return "trade/update";
   }
 
-  @PostMapping("/trade/validate")
+  @PostMapping("/validate")
   public String validateTrade(
     @Valid TradeDto tradeDto,
     BindingResult result,
@@ -98,7 +100,7 @@ public class TradeController {
     return "redirect:/trade/list";
   }
 
-  @PostMapping("/trade/update/{id}")
+  @PostMapping("/update/{id}")
   public String updateTrade(
     @PathVariable Integer id,
     @Valid TradeDto tradeDto,
@@ -129,7 +131,7 @@ public class TradeController {
     return "redirect:/trade/list";
   }
 
-  @PostMapping("/trade/delete/{id}")
+  @PostMapping("/delete/{id}")
   public String deleteTrade(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,

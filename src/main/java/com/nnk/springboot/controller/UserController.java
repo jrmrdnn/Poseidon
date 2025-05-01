@@ -13,16 +13,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/user")
 @Slf4j
 @AllArgsConstructor
 public class UserController {
 
   private final UserService userService;
 
-  @GetMapping("/user/list")
+  @GetMapping("/list")
   public String showUser(RedirectAttributes redirectAttributes, Model model) {
     try {
       List<User> users = userService.getAllUsers();
@@ -39,14 +41,14 @@ public class UserController {
     return "user/list";
   }
 
-  @GetMapping("/user/add")
+  @GetMapping("/add")
   public String showAddUserForm(Model model) {
     UserDto userDto = new UserDto();
     model.addAttribute("userDto", userDto);
     return "user/add";
   }
 
-  @GetMapping("/user/update/{id}")
+  @GetMapping("/update/{id}")
   public String showUpdateForm(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,
@@ -68,7 +70,7 @@ public class UserController {
     return "user/update";
   }
 
-  @PostMapping("/user/validate")
+  @PostMapping("/validate")
   public String validateUser(
     @Valid UserDto userDto,
     BindingResult result,
@@ -95,7 +97,7 @@ public class UserController {
     return "redirect:/user/list";
   }
 
-  @PostMapping("/user/update/{id}")
+  @PostMapping("/update/{id}")
   public String updateUser(
     @PathVariable Integer id,
     @Valid UserDto userDto,
@@ -126,7 +128,7 @@ public class UserController {
     return "redirect:/user/list";
   }
 
-  @PostMapping("/user/delete/{id}")
+  @PostMapping("/delete/{id}")
   public String deleteUser(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,

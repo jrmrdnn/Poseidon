@@ -1,31 +1,30 @@
 package com.nnk.springboot.controller;
 
+import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.dto.RatingDto;
+import com.nnk.springboot.service.RatingService;
+import jakarta.validation.Valid;
 import java.util.List;
-
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.dto.RatingDto;
-import com.nnk.springboot.service.RatingService;
-
-import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
+@RequestMapping("/rating")
 @Slf4j
 @AllArgsConstructor
 public class RatingController {
 
   private final RatingService ratingService;
 
-  @GetMapping("/rating/list")
+  @GetMapping("/list")
   public String showRating(RedirectAttributes redirectAttributes, Model model) {
     try {
       List<Rating> ratings = ratingService.getAllRatings();
@@ -39,14 +38,14 @@ public class RatingController {
     return "rating/list";
   }
 
-  @GetMapping("/rating/add")
+  @GetMapping("/add")
   public String showAddRatingForm(Model model) {
     RatingDto ratingDto = new RatingDto();
     model.addAttribute("ratingDto", ratingDto);
     return "rating/add";
   }
 
-  @GetMapping("/rating/update/{id}")
+  @GetMapping("/update/{id}")
   public String showUpdateRatingForm(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,
@@ -68,7 +67,7 @@ public class RatingController {
     return "rating/update";
   }
 
-  @PostMapping("/rating/validate")
+  @PostMapping("/validate")
   public String validateRating(
     @Valid RatingDto ratingDto,
     BindingResult result,
@@ -98,7 +97,7 @@ public class RatingController {
     return "redirect:/rating/list";
   }
 
-  @PostMapping("/rating/update/{id}")
+  @PostMapping("/update/{id}")
   public String updateRating(
     @PathVariable Integer id,
     @Valid RatingDto ratingDto,
@@ -129,7 +128,7 @@ public class RatingController {
     return "redirect:/rating/list";
   }
 
-  @PostMapping("/rating/delete/{id}")
+  @PostMapping("/delete/{id}")
   public String deleteRating(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,

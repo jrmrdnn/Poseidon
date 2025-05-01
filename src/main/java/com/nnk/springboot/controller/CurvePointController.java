@@ -1,31 +1,30 @@
 package com.nnk.springboot.controller;
 
+import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.dto.CurvePointDto;
+import com.nnk.springboot.service.CurvePointService;
+import jakarta.validation.Valid;
 import java.util.List;
-
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.dto.CurvePointDto;
-import com.nnk.springboot.service.CurvePointService;
-
-import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
+@RequestMapping("/curvePoint")
 @Slf4j
 @AllArgsConstructor
 public class CurvePointController {
 
   private final CurvePointService curvePointService;
 
-  @GetMapping("/curvePoint/list")
+  @GetMapping("/list")
   public String showCurvePoint(
     RedirectAttributes redirectAttributes,
     Model model
@@ -42,14 +41,14 @@ public class CurvePointController {
     return "curvePoint/list";
   }
 
-  @GetMapping("/curvePoint/add")
+  @GetMapping("/add")
   public String showAddCurvePointForm(Model model) {
     CurvePointDto curvePointDto = new CurvePointDto();
     model.addAttribute("curvePointDto", curvePointDto);
     return "curvePoint/add";
   }
 
-  @GetMapping("/curvePoint/update/{id}")
+  @GetMapping("/update/{id}")
   public String showUpdateCurvePointForm(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,
@@ -71,7 +70,7 @@ public class CurvePointController {
     return "curvePoint/update";
   }
 
-  @PostMapping("/curvePoint/validate")
+  @PostMapping("/validate")
   public String validateCurvePoint(
     @Valid CurvePointDto curvePointDto,
     BindingResult result,
@@ -101,7 +100,7 @@ public class CurvePointController {
     return "redirect:/curvePoint/list";
   }
 
-  @PostMapping("/curvePoint/update/{id}")
+  @PostMapping("/update/{id}")
   public String updateCurvePoint(
     @PathVariable Integer id,
     @Valid CurvePointDto curvePointDto,
@@ -132,7 +131,7 @@ public class CurvePointController {
     return "redirect:/curvePoint/list";
   }
 
-  @PostMapping("/curvePoint/delete/{id}")
+  @PostMapping("/delete/{id}")
   public String deleteCurvePoint(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,
