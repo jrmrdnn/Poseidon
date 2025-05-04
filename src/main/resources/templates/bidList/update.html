@@ -8,12 +8,13 @@
       </div>
       <div class="row">
         <form
-          th:action="@{/bidList/update/{id}(id=${bidListId})}"
+          th:action="@{/bidList/{id}(id=${bidListId})}"
           th:object="${bidListDto}"
           method="post"
           class="form-horizontal"
           style="width: 100%"
         >
+          <input type="hidden" name="_method" value="PUT" />
           <div class="form-group">
             <label for="account" class="col-sm-2 control-label">Account</label>
             <div class="col-sm-10">

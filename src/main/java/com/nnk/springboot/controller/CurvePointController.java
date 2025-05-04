@@ -10,9 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -70,8 +72,8 @@ public class CurvePointController {
     return "curvePoint/update";
   }
 
-  @PostMapping("/validate")
-  public String validateCurvePoint(
+  @PostMapping
+  public String addCurvePoint(
     @Valid CurvePointDto curvePointDto,
     BindingResult result,
     RedirectAttributes redirectAttributes,
@@ -100,7 +102,7 @@ public class CurvePointController {
     return "redirect:/curvePoint/list";
   }
 
-  @PostMapping("/update/{id}")
+  @PutMapping("/{id}")
   public String updateCurvePoint(
     @PathVariable Integer id,
     @Valid CurvePointDto curvePointDto,
@@ -131,7 +133,7 @@ public class CurvePointController {
     return "redirect:/curvePoint/list";
   }
 
-  @PostMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   public String deleteCurvePoint(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,

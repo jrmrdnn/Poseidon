@@ -13,12 +13,13 @@
       ></div>
       <div class="row">
         <form
-          th:action="@{/user/update/{id}(id=${userId})}"
+          th:action="@{/user/{id}(id=${userId})}"
           th:object="${userDto}"
           method="post"
           class="form-horizontal"
           style="width: 100%"
         >
+          <input type="hidden" name="_method" value="PUT" />
           <div class="form-group">
             <label for="fullname" class="col-sm-2 control-label"
               >Full Name</label

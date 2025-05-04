@@ -131,14 +131,14 @@ class RuleControllerTest {
   }
 
   @Nested
-  public class TestValidateRule {
+  public class TestAddRule {
 
     @Test
-    public void validateRule_shouldReturnAddView_whenBindingResultHasErrors() {
+    public void addRule_shouldReturnAddView_whenBindingResultHasErrors() {
       RuleDto rule = new RuleDto();
       when(bindingResult.hasErrors()).thenReturn(true);
 
-      String view = ruleController.validateRule(
+      String view = ruleController.addRule(
         rule,
         bindingResult,
         redirectAttributes,
@@ -150,11 +150,11 @@ class RuleControllerTest {
     }
 
     @Test
-    public void validateRule_shouldAddRule_andRedirect_whenNoErrors() {
+    public void addRule_shouldAddRule_andRedirect_whenNoErrors() {
       RuleDto rule = new RuleDto();
       when(bindingResult.hasErrors()).thenReturn(false);
 
-      String view = ruleController.validateRule(
+      String view = ruleController.addRule(
         rule,
         bindingResult,
         redirectAttributes,
@@ -166,14 +166,14 @@ class RuleControllerTest {
     }
 
     @Test
-    public void validateRule_shouldHandleException_andRedirect() {
+    public void addRule_shouldHandleException_andRedirect() {
       RuleDto rule = new RuleDto();
       when(bindingResult.hasErrors()).thenReturn(false);
       doThrow(new RuntimeException())
         .when(ruleService)
         .addRule(any(RuleDto.class));
 
-      String view = ruleController.validateRule(
+      String view = ruleController.addRule(
         rule,
         bindingResult,
         redirectAttributes,

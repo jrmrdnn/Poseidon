@@ -10,9 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -67,8 +69,8 @@ public class RatingController {
     return "rating/update";
   }
 
-  @PostMapping("/validate")
-  public String validateRating(
+  @PostMapping
+  public String addRating(
     @Valid RatingDto ratingDto,
     BindingResult result,
     RedirectAttributes redirectAttributes,
@@ -97,7 +99,7 @@ public class RatingController {
     return "redirect:/rating/list";
   }
 
-  @PostMapping("/update/{id}")
+  @PutMapping("/{id}")
   public String updateRating(
     @PathVariable Integer id,
     @Valid RatingDto ratingDto,
@@ -128,7 +130,7 @@ public class RatingController {
     return "redirect:/rating/list";
   }
 
-  @PostMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   public String deleteRating(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,

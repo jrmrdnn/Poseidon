@@ -131,14 +131,14 @@ class TradeControllerTest {
   }
 
   @Nested
-  public class TestValidateTrade {
+  public class TestAddTrade {
 
     @Test
-    public void validateTrade_shouldReturnAddView_whenBindingResultHasErrors() {
+    public void addTrade_shouldReturnAddView_whenBindingResultHasErrors() {
       TradeDto trade = new TradeDto();
       when(bindingResult.hasErrors()).thenReturn(true);
 
-      String view = tradeController.validateTrade(
+      String view = tradeController.addTrade(
         trade,
         bindingResult,
         redirectAttributes,
@@ -150,11 +150,11 @@ class TradeControllerTest {
     }
 
     @Test
-    public void validateTrade_shouldAddTrade_andRedirect_whenNoErrors() {
+    public void addTrade_shouldAddTrade_andRedirect_whenNoErrors() {
       TradeDto trade = new TradeDto();
       when(bindingResult.hasErrors()).thenReturn(false);
 
-      String view = tradeController.validateTrade(
+      String view = tradeController.addTrade(
         trade,
         bindingResult,
         redirectAttributes,
@@ -166,14 +166,14 @@ class TradeControllerTest {
     }
 
     @Test
-    public void validateTrade_shouldHandleException_andRedirect() {
+    public void addTrade_shouldHandleException_andRedirect() {
       TradeDto trade = new TradeDto();
       when(bindingResult.hasErrors()).thenReturn(false);
       doThrow(new RuntimeException())
         .when(tradeService)
         .addTrade(any(TradeDto.class));
 
-      String view = tradeController.validateTrade(
+      String view = tradeController.addTrade(
         trade,
         bindingResult,
         redirectAttributes,

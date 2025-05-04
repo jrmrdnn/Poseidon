@@ -10,9 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -70,8 +72,8 @@ public class BidListController {
     return "bidList/update";
   }
 
-  @PostMapping("/validate")
-  public String validateBid(
+  @PostMapping
+  public String addBid(
     @Valid BidListDto bidListDto,
     BindingResult result,
     RedirectAttributes redirectAttributes,
@@ -97,7 +99,7 @@ public class BidListController {
     return "redirect:/bidList/list";
   }
 
-  @PostMapping("/update/{id}")
+  @PutMapping("/{id}")
   public String updateBid(
     @PathVariable Integer id,
     @Valid BidListDto bidListDto,
@@ -127,7 +129,7 @@ public class BidListController {
     return "redirect:/bidList/list";
   }
 
-  @PostMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   public String deleteBid(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,

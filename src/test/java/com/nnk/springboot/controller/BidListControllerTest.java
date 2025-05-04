@@ -134,14 +134,14 @@ class BidListControllerTest {
   }
 
   @Nested
-  public class TestValidateBid {
+  public class TestAddBid {
 
     @Test
-    public void validateBid_shouldReturnAddView_whenBindingResultHasErrors() {
+    public void addBid_shouldReturnAddView_whenBindingResultHasErrors() {
       BidListDto bid = new BidListDto();
       when(bindingResult.hasErrors()).thenReturn(true);
 
-      String view = bidListController.validateBid(
+      String view = bidListController.addBid(
         bid,
         bindingResult,
         redirectAttributes,
@@ -153,11 +153,11 @@ class BidListControllerTest {
     }
 
     @Test
-    public void validateBid_shouldAddBid_andReturnAddView_whenNoErrors() {
+    public void addBid_shouldAddBid_andReturnAddView_whenNoErrors() {
       BidListDto bid = new BidListDto();
       when(bindingResult.hasErrors()).thenReturn(false);
 
-      String view = bidListController.validateBid(
+      String view = bidListController.addBid(
         bid,
         bindingResult,
         redirectAttributes,
@@ -169,14 +169,14 @@ class BidListControllerTest {
     }
 
     @Test
-    public void validateBid_shouldHandleException_andReturnAddView() {
+    public void addBid_shouldHandleException_andReturnAddView() {
       BidListDto bid = new BidListDto();
       when(bindingResult.hasErrors()).thenReturn(false);
       doThrow(new RuntimeException())
         .when(bidListService)
         .addBid(any(BidListDto.class));
 
-      String view = bidListController.validateBid(
+      String view = bidListController.addBid(
         bid,
         bindingResult,
         redirectAttributes,

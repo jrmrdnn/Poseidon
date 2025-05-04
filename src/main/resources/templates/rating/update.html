@@ -13,12 +13,13 @@
       ></div>
       <div class="row">
         <form
-          th:action="@{/rating/update/{id}(id=${ratingId})}"
+          th:action="@{/rating/{id}(id=${ratingId})}"
           th:object="${ratingDto}"
           method="post"
           class="form-horizontal"
           style="width: 100%"
         >
+          <input type="hidden" name="_method" value="PUT" />
           <div class="form-group">
             <label for="moodysRating" class="col-sm-2 control-label"
               >MoodysRating</label

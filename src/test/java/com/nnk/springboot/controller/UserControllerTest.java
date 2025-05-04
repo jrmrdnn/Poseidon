@@ -104,14 +104,14 @@ class UserControllerTest {
   }
 
   @Nested
-  public class TestValidateUser {
+  public class TestAddUser {
 
     @Test
-    public void validateUser_shouldReturnAddView_whenBindingResultHasErrors() {
+    public void addUser_shouldReturnAddView_whenBindingResultHasErrors() {
       UserDto userDto = new UserDto();
       when(bindingResult.hasErrors()).thenReturn(true);
 
-      String view = userController.validateUser(
+      String view = userController.addUser(
         userDto,
         bindingResult,
         redirectAttributes,
@@ -123,11 +123,11 @@ class UserControllerTest {
     }
 
     @Test
-    public void validateUser_shouldAddUser_andRedirect_whenNoErrors() {
+    public void addUser_shouldAddUser_andRedirect_whenNoErrors() {
       UserDto userDto = new UserDto();
       when(bindingResult.hasErrors()).thenReturn(false);
 
-      String view = userController.validateUser(
+      String view = userController.addUser(
         userDto,
         bindingResult,
         redirectAttributes,
@@ -139,14 +139,14 @@ class UserControllerTest {
     }
 
     @Test
-    public void validateUser_shouldHandleException_andRedirect() {
+    public void addUser_shouldHandleException_andRedirect() {
       UserDto userDto = new UserDto();
       when(bindingResult.hasErrors()).thenReturn(false);
       doThrow(new RuntimeException())
         .when(userService)
         .addUser(any(UserDto.class));
 
-      String view = userController.validateUser(
+      String view = userController.addUser(
         userDto,
         bindingResult,
         redirectAttributes,

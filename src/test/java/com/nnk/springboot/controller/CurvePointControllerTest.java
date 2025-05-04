@@ -1,27 +1,26 @@
 package com.nnk.springboot.controller;
 
-import java.util.Collections;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.dto.CurvePointDto;
 import com.nnk.springboot.service.CurvePointService;
+import java.util.Collections;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @ExtendWith(MockitoExtension.class)
 class CurvePointControllerTest {
@@ -78,10 +77,10 @@ class CurvePointControllerTest {
   }
 
   @Nested
-  public class TestShowAddBidForm {
+  public class TestShowAddCurvePointForm {
 
     @Test
-    public void showAddBidForm_shouldAddNewCurvePointToModel_andReturnAddView() {
+    public void showAddCurvePointForm_shouldAddNewCurvePointToModel_andReturnAddView() {
       String view = curvePointController.showAddCurvePointForm(model);
 
       verify(model).addAttribute(eq("curvePointDto"), any(CurvePointDto.class));
@@ -90,10 +89,10 @@ class CurvePointControllerTest {
   }
 
   @Nested
-  public class TestShowUpdateBidForm {
+  public class TestShowUpdateCurvePointForm {
 
     @Test
-    public void showUpdateBidForm_shouldAddBidListToModel_andReturnUpdateView() {
+    public void showUpdateCurvePointForm_shouldAddCurvePointListToModel_andReturnUpdateView() {
       CurvePointDto curvePoint = new CurvePointDto();
       when(curvePointService.getCurvePointById(1)).thenReturn(curvePoint);
 
@@ -108,7 +107,7 @@ class CurvePointControllerTest {
     }
 
     @Test
-    public void showUpdateBidForm_shouldHandleException_andReturnListView() {
+    public void showUpdateCurvePointForm_shouldHandleException_andReturnListView() {
       when(curvePointService.getCurvePointById(1)).thenThrow(
         new RuntimeException()
       );
@@ -124,10 +123,10 @@ class CurvePointControllerTest {
   }
 
   @Nested
-  public class TestDeleteBid {
+  public class TestDeleteCurvePoint {
 
     @Test
-    public void deleteBid_shouldDeleteCurvePoint_andRedirect() {
+    public void deleteCurvePoint_shouldDeleteCurvePoint_andRedirect() {
       String view = curvePointController.deleteCurvePoint(
         1,
         redirectAttributes,
@@ -139,7 +138,7 @@ class CurvePointControllerTest {
     }
 
     @Test
-    public void deleteBid_shouldHandleException_andRedirect() {
+    public void deleteCurvePoint_shouldHandleException_andRedirect() {
       doThrow(new RuntimeException())
         .when(curvePointService)
         .deleteCurvePoint(1);
@@ -155,14 +154,14 @@ class CurvePointControllerTest {
   }
 
   @Nested
-  public class TestValidateBid {
+  public class TestValidateCurvePoint {
 
     @Test
-    public void validateBid_shouldReturnAddView_whenBindingResultHasErrors() {
+    public void addCurvePoint_shouldReturnAddView_whenBindingResultHasErrors() {
       CurvePointDto curvePoint = new CurvePointDto();
       when(bindingResult.hasErrors()).thenReturn(true);
 
-      String view = curvePointController.validateCurvePoint(
+      String view = curvePointController.addCurvePoint(
         curvePoint,
         bindingResult,
         redirectAttributes,
@@ -174,11 +173,11 @@ class CurvePointControllerTest {
     }
 
     @Test
-    public void validateBid_shouldAddCurvePoint_andReturnListView_whenNoErrors() {
+    public void addCurvePoint_shouldAddCurvePoint_andReturnListView_whenNoErrors() {
       CurvePointDto curvePoint = new CurvePointDto();
       when(bindingResult.hasErrors()).thenReturn(false);
 
-      String view = curvePointController.validateCurvePoint(
+      String view = curvePointController.addCurvePoint(
         curvePoint,
         bindingResult,
         redirectAttributes,
@@ -190,14 +189,14 @@ class CurvePointControllerTest {
     }
 
     @Test
-    public void validateBid_shouldHandleException_andRedirect() {
+    public void addCurvePoint_shouldHandleException_andRedirect() {
       CurvePointDto curvePoint = new CurvePointDto();
       when(bindingResult.hasErrors()).thenReturn(false);
       doThrow(new RuntimeException())
         .when(curvePointService)
         .addCurvePoint(any(CurvePointDto.class));
 
-      String view = curvePointController.validateCurvePoint(
+      String view = curvePointController.addCurvePoint(
         curvePoint,
         bindingResult,
         redirectAttributes,
@@ -210,10 +209,10 @@ class CurvePointControllerTest {
   }
 
   @Nested
-  public class TestUpdateBid {
+  public class TestUpdateCurvePoint {
 
     @Test
-    public void updateBid_shouldReturnUpdateView_whenBindingResultHasErrors() {
+    public void updateCurvePoint_shouldReturnUpdateView_whenBindingResultHasErrors() {
       CurvePointDto curvePoint = new CurvePointDto();
       when(bindingResult.hasErrors()).thenReturn(true);
 
@@ -230,7 +229,7 @@ class CurvePointControllerTest {
     }
 
     @Test
-    public void updateBid_shouldUpdateCurvePoint_andRedirect_whenNoErrors() {
+    public void updateCurvePoint_shouldUpdateCurvePoint_andRedirect_whenNoErrors() {
       CurvePointDto curvePoint = new CurvePointDto();
       when(bindingResult.hasErrors()).thenReturn(false);
 
@@ -250,7 +249,7 @@ class CurvePointControllerTest {
     }
 
     @Test
-    public void updateBid_shouldHandleException_andRedirect() {
+    public void updateCurvePoint_shouldHandleException_andRedirect() {
       CurvePointDto curvePoint = new CurvePointDto();
       when(bindingResult.hasErrors()).thenReturn(false);
       doThrow(new RuntimeException())

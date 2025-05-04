@@ -1,27 +1,26 @@
 package com.nnk.springboot.controller;
 
-import java.util.Collections;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dto.RatingDto;
 import com.nnk.springboot.service.RatingService;
+import java.util.Collections;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @ExtendWith(MockitoExtension.class)
 class RatingControllerTest {
@@ -132,14 +131,14 @@ class RatingControllerTest {
   }
 
   @Nested
-  public class TestValidateRating {
+  public class TestAddRating {
 
     @Test
-    public void validateBid_shouldReturnAddView_whenBindingResultHasErrors() {
+    public void addBid_shouldReturnAddView_whenBindingResultHasErrors() {
       RatingDto rating = new RatingDto();
       when(bindingResult.hasErrors()).thenReturn(true);
 
-      String view = ratingController.validateRating(
+      String view = ratingController.addRating(
         rating,
         bindingResult,
         redirectAttributes,
@@ -151,11 +150,11 @@ class RatingControllerTest {
     }
 
     @Test
-    public void validateBid_shouldAddRating_andRedirect_whenNoErrors() {
+    public void addBid_shouldAddRating_andRedirect_whenNoErrors() {
       RatingDto rating = new RatingDto();
       when(bindingResult.hasErrors()).thenReturn(false);
 
-      String view = ratingController.validateRating(
+      String view = ratingController.addRating(
         rating,
         bindingResult,
         redirectAttributes,
@@ -167,14 +166,14 @@ class RatingControllerTest {
     }
 
     @Test
-    public void validateBid_shouldHandleException_andRedirect() {
+    public void addBid_shouldHandleException_andRedirect() {
       RatingDto rating = new RatingDto();
       when(bindingResult.hasErrors()).thenReturn(false);
       doThrow(new RuntimeException())
         .when(ratingService)
         .addRating(any(RatingDto.class));
 
-      String view = ratingController.validateRating(
+      String view = ratingController.addRating(
         rating,
         bindingResult,
         redirectAttributes,

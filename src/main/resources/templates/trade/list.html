@@ -42,11 +42,12 @@
                   >Edit</a
                 >&nbsp;|&nbsp;
                 <form
-                  th:action="@{/trade/delete/{id}(id=${trade.tradeId})}"
+                  th:action="@{/trade/{id}(id=${trade.tradeId})}"
                   method="post"
                   style="display: inline"
                   onsubmit="return confirm('Are you sure you want to delete this item ?');"
                 >
+                  <input type="hidden" name="_method" value="DELETE" />
                   <button type="submit" class="btn btn-link p-0">Delete</button>
                 </form>
               </td>

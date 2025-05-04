@@ -10,9 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -70,8 +72,8 @@ public class UserController {
     return "user/update";
   }
 
-  @PostMapping("/validate")
-  public String validateUser(
+  @PostMapping
+  public String addUser(
     @Valid UserDto userDto,
     BindingResult result,
     RedirectAttributes redirectAttributes,
@@ -97,7 +99,7 @@ public class UserController {
     return "redirect:/user/list";
   }
 
-  @PostMapping("/update/{id}")
+  @PutMapping("/{id}")
   public String updateUser(
     @PathVariable Integer id,
     @Valid UserDto userDto,
@@ -128,7 +130,7 @@ public class UserController {
     return "redirect:/user/list";
   }
 
-  @PostMapping("/delete/{id}")
+  @DeleteMapping("/{id}")
   public String deleteUser(
     @PathVariable Integer id,
     RedirectAttributes redirectAttributes,
