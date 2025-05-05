@@ -6,6 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+/**
+ * RatingMapper is an interface for mapping between Rating and RatingDto objects.
+ */
 @Mapper(
   componentModel = "spring",
   unmappedTargetPolicy = ReportingPolicy.IGNORE

@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * RatingController handles requests related to Rating operations.
+ */
 @Controller
 @RequestMapping("/rating")
 @Slf4j
@@ -26,6 +29,12 @@ public class RatingController {
 
   private final RatingService ratingService;
 
+  /**
+   * Shows the rating list page.
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Rating list page
+   */
   @GetMapping("/list")
   public String showRating(RedirectAttributes redirectAttributes, Model model) {
     try {
@@ -40,6 +49,11 @@ public class RatingController {
     return "rating/list";
   }
 
+  /**
+   * Shows the add rating page.
+   * @param model the model to be used in the view
+   * @return Rating add page
+   */
   @GetMapping("/add")
   public String showAddRatingForm(Model model) {
     RatingDto ratingDto = new RatingDto();
@@ -47,6 +61,13 @@ public class RatingController {
     return "rating/add";
   }
 
+  /**
+   * Shows the update rating page.
+   * @param id the ID of the rating to be updated
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Rating update page
+   */
   @GetMapping("/update/{id}")
   public String showUpdateRatingForm(
     @PathVariable Integer id,
@@ -69,6 +90,14 @@ public class RatingController {
     return "rating/update";
   }
 
+  /**
+   * Adds a new rating.
+   * @param ratingDto the rating data transfer object
+   * @param result the binding result for validation errors
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirects to the rating list page or shows the add page with errors
+   */
   @PostMapping
   public String addRating(
     @Valid RatingDto ratingDto,
@@ -99,6 +128,15 @@ public class RatingController {
     return "redirect:/rating/list";
   }
 
+  /**
+   * Updates an existing rating.
+   * @param id the ID of the rating to be updated
+   * @param ratingDto the rating data transfer object
+   * @param result the binding result for validation errors
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirects to the rating list page or shows the update page with errors
+   */
   @PutMapping("/{id}")
   public String updateRating(
     @PathVariable Integer id,
@@ -130,6 +168,13 @@ public class RatingController {
     return "redirect:/rating/list";
   }
 
+  /**
+   * Deletes a rating.
+   * @param id the ID of the rating to be deleted
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirects to the rating list page
+   */
   @DeleteMapping("/{id}")
   public String deleteRating(
     @PathVariable Integer id,

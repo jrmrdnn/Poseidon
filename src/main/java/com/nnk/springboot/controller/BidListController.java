@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * BidListController handles requests related to BidList operations.
+ */
 @Controller
 @RequestMapping("/bidList")
 @Slf4j
@@ -26,6 +29,12 @@ public class BidListController {
 
   private final BidListService bidListService;
 
+  /**
+   * Shows the bid list page.
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return BidList list page
+   */
   @GetMapping("/list")
   public String showBidList(
     RedirectAttributes redirectAttributes,
@@ -43,6 +52,11 @@ public class BidListController {
     return "bidList/list";
   }
 
+  /**
+   * Shows the add bid page.
+   * @param model the model to be used in the view
+   * @return BidList add page
+   */
   @GetMapping("/add")
   public String showAddBidForm(Model model) {
     BidListDto bidListDto = new BidListDto();
@@ -50,6 +64,13 @@ public class BidListController {
     return "bidList/add";
   }
 
+  /**
+   * Shows the update bid page.
+   * @param id the ID of the bid to be updated
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return BidList update page
+   */
   @GetMapping("/update/{id}")
   public String showUpdateBidForm(
     @PathVariable Integer id,
@@ -72,6 +93,14 @@ public class BidListController {
     return "bidList/update";
   }
 
+  /**
+   * Adds a new bid.
+   * @param bidListDto the bid details to be added
+   * @param result binding result for validation errors
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirect to the bid list page
+   */
   @PostMapping
   public String addBid(
     @Valid BidListDto bidListDto,
@@ -99,6 +128,15 @@ public class BidListController {
     return "redirect:/bidList/list";
   }
 
+  /**
+   * Updates an existing bid.
+   * @param id the ID of the bid to be updated
+   * @param bidListDto the updated bid details
+   * @param result binding result for validation errors
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirect to the bid list page
+   */
   @PutMapping("/{id}")
   public String updateBid(
     @PathVariable Integer id,
@@ -129,6 +167,13 @@ public class BidListController {
     return "redirect:/bidList/list";
   }
 
+  /**
+   * Deletes a bid by ID.
+   * @param id the ID of the bid to be deleted
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirect to the bid list page
+   */
   @DeleteMapping("/{id}")
   public String deleteBid(
     @PathVariable Integer id,

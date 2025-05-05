@@ -6,6 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+/**
+ * UserMapper is an interface for mapping between User and UserDto objects.
+ */
 @Mapper(
   componentModel = "spring",
   unmappedTargetPolicy = ReportingPolicy.IGNORE

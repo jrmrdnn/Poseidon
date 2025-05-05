@@ -6,6 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+/**
+ * TradeMapper is an interface for mapping between Trade and TradeDto objects.
+ */
 @Mapper(
   componentModel = "spring",
   unmappedTargetPolicy = ReportingPolicy.IGNORE

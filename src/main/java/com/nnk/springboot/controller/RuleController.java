@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * RuleController handles requests related to Rule operations.
+ */
 @Controller
 @RequestMapping("/ruleName")
 @Slf4j
@@ -26,6 +29,12 @@ public class RuleController {
 
   private final RuleService ruleService;
 
+  /**
+   * Shows the rule list page.
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Rule list page
+   */
   @GetMapping("/list")
   public String showRule(RedirectAttributes redirectAttributes, Model model) {
     try {
@@ -40,6 +49,11 @@ public class RuleController {
     return "rule/list";
   }
 
+  /**
+   * Shows the add rule page.
+   * @param model the model to be used in the view
+   * @return Rule add page
+   */
   @GetMapping("/add")
   public String showAddRuleForm(Model model) {
     RuleDto ruleDto = new RuleDto();
@@ -47,6 +61,13 @@ public class RuleController {
     return "rule/add";
   }
 
+  /**
+   * Shows the update rule page.
+   * @param id the ID of the rule to be updated
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Rule update page
+   */
   @GetMapping("/update/{id}")
   public String showUpdateRuleForm(
     @PathVariable Integer id,
@@ -69,6 +90,13 @@ public class RuleController {
     return "rule/update";
   }
 
+  /**
+   * Shows the delete rule page.
+   * @param id the ID of the rule to be deleted
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Rule delete page
+   */
   @PostMapping
   public String addRule(
     @Valid RuleDto ruleDto,
@@ -96,9 +124,18 @@ public class RuleController {
     return "redirect:/ruleName/list";
   }
 
+  /**
+   * Updates an existing rule.
+   * @param id the ID of the rule to be updated
+   * @param ruleDto the updated rule details
+   * @param result binding result for validation errors
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirect to the rule list page
+   */
   @PutMapping("/{id}")
   public String updateRule(
-    @PathVariable("id") Integer id,
+    @PathVariable Integer id,
     @Valid RuleDto ruleDto,
     BindingResult result,
     RedirectAttributes redirectAttributes,
@@ -127,6 +164,12 @@ public class RuleController {
     return "redirect:/ruleName/list";
   }
 
+  /**
+   * Deletes a rule.
+   * @param id the ID of the rule to be deleted
+   * @param redirectAttributes attributes for redirecting
+   * @return Redirect to the rule list page
+   */
   @DeleteMapping("/{id}")
   public String deleteRule(
     @PathVariable Integer id,

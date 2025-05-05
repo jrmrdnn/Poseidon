@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * CurvePointController handles requests related to CurvePoint operations.
+ */
 @Controller
 @RequestMapping("/curvePoint")
 @Slf4j
@@ -26,6 +29,12 @@ public class CurvePointController {
 
   private final CurvePointService curvePointService;
 
+  /**
+   * Shows the list of all curve points.
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return CurvePoint list page
+   */
   @GetMapping("/list")
   public String showCurvePoint(
     RedirectAttributes redirectAttributes,
@@ -43,6 +52,11 @@ public class CurvePointController {
     return "curvePoint/list";
   }
 
+  /**
+   * Shows the add curve point page.
+   * @param model the model to be used in the view
+   * @return CurvePoint add page
+   */
   @GetMapping("/add")
   public String showAddCurvePointForm(Model model) {
     CurvePointDto curvePointDto = new CurvePointDto();
@@ -50,6 +64,13 @@ public class CurvePointController {
     return "curvePoint/add";
   }
 
+  /**
+   * Shows the update curve point page.
+   * @param id the ID of the curve point to be updated
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return CurvePoint update page
+   */
   @GetMapping("/update/{id}")
   public String showUpdateCurvePointForm(
     @PathVariable Integer id,
@@ -72,6 +93,14 @@ public class CurvePointController {
     return "curvePoint/update";
   }
 
+  /**
+   * Adds a new curve point.
+   * @param curvePointDto the curve point data transfer object
+   * @param result the binding result for validation errors
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirect to the curve point list page
+   */
   @PostMapping
   public String addCurvePoint(
     @Valid CurvePointDto curvePointDto,
@@ -102,6 +131,15 @@ public class CurvePointController {
     return "redirect:/curvePoint/list";
   }
 
+  /**
+   * Updates an existing curve point.
+   * @param id the ID of the curve point to be updated
+   * @param curvePointDto the curve point data transfer object
+   * @param result the binding result for validation errors
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirect to the curve point list page
+   */
   @PutMapping("/{id}")
   public String updateCurvePoint(
     @PathVariable Integer id,
@@ -133,6 +171,13 @@ public class CurvePointController {
     return "redirect:/curvePoint/list";
   }
 
+  /**
+   * Deletes a curve point.
+   * @param id the ID of the curve point to be deleted
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Redirect to the curve point list page
+   */
   @DeleteMapping("/{id}")
   public String deleteCurvePoint(
     @PathVariable Integer id,

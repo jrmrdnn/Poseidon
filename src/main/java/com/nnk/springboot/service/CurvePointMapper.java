@@ -5,6 +5,9 @@ import com.nnk.springboot.dto.CurvePointDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+/**
+ * CurvePointMapper is an interface for mapping between CurvePoint and CurvePointDto objects.
+ */
 @Mapper(
   componentModel = "spring",
   unmappedTargetPolicy = ReportingPolicy.IGNORE

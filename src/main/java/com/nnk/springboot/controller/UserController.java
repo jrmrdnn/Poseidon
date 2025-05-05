@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * UserController handles requests related to User operations.
+ */
 @Controller
 @RequestMapping("/user")
 @Slf4j
@@ -26,6 +29,12 @@ public class UserController {
 
   private final UserService userService;
 
+  /**
+   * Shows the user list page.
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return User list page
+   */
   @GetMapping("/list")
   public String showUser(RedirectAttributes redirectAttributes, Model model) {
     try {
@@ -43,6 +52,11 @@ public class UserController {
     return "user/list";
   }
 
+  /**
+   * Shows the add user page.
+   * @param model the model to be used in the view
+   * @return User add page
+   */
   @GetMapping("/add")
   public String showAddUserForm(Model model) {
     UserDto userDto = new UserDto();
@@ -50,6 +64,13 @@ public class UserController {
     return "user/add";
   }
 
+  /**
+   * Shows the update user page.
+   * @param id the id of the user to be updated
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return User update page
+   */
   @GetMapping("/update/{id}")
   public String showUpdateForm(
     @PathVariable Integer id,
@@ -72,6 +93,14 @@ public class UserController {
     return "user/update";
   }
 
+  /**
+   * Adds a new user.
+   * @param userDto the user data transfer object
+   * @param result the binding result
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return redirect to user list page
+   */
   @PostMapping
   public String addUser(
     @Valid UserDto userDto,
@@ -99,6 +128,15 @@ public class UserController {
     return "redirect:/user/list";
   }
 
+  /**
+   * Updates an existing user.
+   * @param id the id of the user to be updated
+   * @param userDto the user data transfer object
+   * @param result the binding result
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return redirect to user list page
+   */
   @PutMapping("/{id}")
   public String updateUser(
     @PathVariable Integer id,
@@ -130,6 +168,13 @@ public class UserController {
     return "redirect:/user/list";
   }
 
+  /**
+   * Deletes an existing user.
+   * @param id the id of the user to be deleted
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return redirect to user list page
+   */
   @DeleteMapping("/{id}")
   public String deleteUser(
     @PathVariable Integer id,

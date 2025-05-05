@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * TradeController handles requests related to Trade operations.
+ */
 @Controller
 @RequestMapping("/trade")
 @Slf4j
@@ -26,6 +29,12 @@ public class TradeController {
 
   private final TradeService tradeService;
 
+  /**
+   * Shows the trade list page.
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Trade list page
+   */
   @GetMapping("/list")
   public String showTrade(RedirectAttributes redirectAttributes, Model model) {
     try {
@@ -43,6 +52,11 @@ public class TradeController {
     return "trade/list";
   }
 
+  /**
+   * Shows the add trade page.
+   * @param model the model to be used in the view
+   * @return Trade add page
+   */
   @GetMapping("/add")
   public String showAddTradeForm(Model model) {
     TradeDto tradeDto = new TradeDto();
@@ -50,6 +64,13 @@ public class TradeController {
     return "trade/add";
   }
 
+  /**
+   * Shows the update trade page.
+   * @param id the id of the trade to be updated
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Trade update page
+   */
   @GetMapping("/update/{id}")
   public String showUpdateTradeForm(
     @PathVariable Integer id,
@@ -72,6 +93,14 @@ public class TradeController {
     return "trade/update";
   }
 
+  /**
+   * Adds a new trade.
+   * @param tradeDto the trade data transfer object
+   * @param result the binding result for validation errors
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Trade list page or add page in case of error
+   */
   @PostMapping
   public String addTrade(
     @Valid TradeDto tradeDto,
@@ -102,6 +131,15 @@ public class TradeController {
     return "redirect:/trade/list";
   }
 
+  /**
+   * Updates an existing trade.
+   * @param id the id of the trade to be updated
+   * @param tradeDto the trade data transfer object
+   * @param result the binding result for validation errors
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Trade list page or update page in case of error
+   */
   @PutMapping("/{id}")
   public String updateTrade(
     @PathVariable Integer id,
@@ -133,6 +171,13 @@ public class TradeController {
     return "redirect:/trade/list";
   }
 
+  /**
+   * Deletes a trade.
+   * @param id the id of the trade to be deleted
+   * @param redirectAttributes attributes for redirecting
+   * @param model the model to be used in the view
+   * @return Trade list page
+   */
   @DeleteMapping("/{id}")
   public String deleteTrade(
     @PathVariable Integer id,

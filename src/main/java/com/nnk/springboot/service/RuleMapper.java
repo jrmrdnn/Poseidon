@@ -5,6 +5,9 @@ import com.nnk.springboot.dto.RuleDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+/**
+ * RuleMapper is an interface for mapping between Rule and RuleDto objects.
+ */
 @Mapper(
   componentModel = "spring",
   unmappedTargetPolicy = ReportingPolicy.IGNORE
